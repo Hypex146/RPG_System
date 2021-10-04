@@ -22,12 +22,16 @@ import plugin.utilities.Configurator;
 public class RPGSystem extends JavaPlugin {
 	private FileConfiguration config;
 	private boolean enable;
-	public HashMap<String, PlayerData> playerDataMap;
+	private HashMap<String, PlayerData> playerDataMap;
 	private static Economy econ = null;
 	public int addExpInSec = 1;
 	
 	public RPGSystem() {
 		return;
+	}
+	
+	public HashMap<String, PlayerData> getPlayerDataMap() {
+		return playerDataMap;
 	}
 	
 	public void checkConfig() {

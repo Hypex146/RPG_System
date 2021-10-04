@@ -23,6 +23,10 @@ public class PlayerData {
 	private String playerName;
 	private int playerLevel;
 	
+	public HashMap<String, Ability> getAbilitiesMap(){
+		return abilitiesMap;
+	}
+	
 	public void setPlayerLevel(int value) {
 		this.playerLevel = value;
 		return;
@@ -36,7 +40,7 @@ public class PlayerData {
 		this.mainPlugin = mainPlugin;
 		this.uuid = player.getUniqueId();
 		this.playerName = player.getName();
-		pathToFile = pathToFolder + "/" + uuid.hashCode();
+		pathToFile = pathToFolder + "/" + uuid.toString();
 		abilitiesMap = new HashMap<String, Ability>();
 		checkConfig();
 		return;

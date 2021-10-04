@@ -43,7 +43,7 @@ public class PAPIExpansion extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer player, String params) {
         if(params.equalsIgnoreCase(config.getString("lvl"))){
-            return String.valueOf(mainPlugin.playerDataMap.get(player.getName()).getPlayerLevel());
+            return String.valueOf(mainPlugin.getPlayerDataMap().get(player.getName()).getPlayerLevel());
         }   
         return null; // Placeholder is unknown by the Expansion
     }
