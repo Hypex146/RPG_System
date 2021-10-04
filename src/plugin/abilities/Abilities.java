@@ -7,15 +7,15 @@ public enum Abilities {
 	STUN,
 	REPULSION;
 	
-	public static Ability createAbility(String abilityName, RPGSystem mainPlugin) {
+	public static Ability createAbility(String abilityName, RPGSystem mainPlugin, int abilityLevel) {
 		if (abilityName.equals(Abilities.EYEEXPLOSION.toString())) {
-			return new EyeExplosion(mainPlugin);
+			return new EyeExplosion(mainPlugin, abilityLevel);
 		}
 		if (abilityName.equals(Abilities.STUN.toString())) {
-			return new Repulsion(mainPlugin);
+			return new Repulsion(mainPlugin, abilityLevel);
 		}
 		if (abilityName.equals(Abilities.REPULSION.toString())) {
-			return new Stun(mainPlugin);
+			return new Stun(mainPlugin, abilityLevel);
 		}
 		return null;
 	}
