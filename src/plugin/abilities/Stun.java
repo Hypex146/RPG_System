@@ -1,11 +1,14 @@
 package plugin.abilities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import org.bukkit.Particle;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -32,6 +35,7 @@ public class Stun implements Ability{
 	public Stun(RPGSystem mainPlugin, int abilityLevel) {
 		this.mainPlugin = mainPlugin;
 		this.abilityLevel = abilityLevel;
+		update();
 	}
 	
 	private void update() {
@@ -43,7 +47,7 @@ public class Stun implements Ability{
 		stunDist = Configurator.getInt(config, pathToLevelSection + ".stunDist", 1);
 		limitPlayerStun = Configurator.getInt(config, pathToLevelSection + ".limitPlayerStun", 1);
 		unlimitedPlayerStun = Configurator.getBoolean(config, pathToLevelSection + ".unlimitedPlayerStun", false);
-		timeStun = Configurator.getInt(config, pathToLevelSection + ".stunDist", 1);
+		timeStun = Configurator.getInt(config, pathToLevelSection + ".timeStun", 1);
 		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
@@ -76,35 +80,31 @@ public class Stun implements Ability{
 			return false;
 		}*/
 		return true;
-	}
-	
-	public void stunWave(Player player) {
-		TreeMap<Double, Entity> tree = new TreeMap<Double, Entity>();
-		int countUnderStun = 0;
-		for (Entity otherPlayer : player.getNearbyEntities(stunDist, stunDist, stunDist)) {
-			if (otherPlayer.getType()!=EntityType.PLAYER) {continue;}
-			if (!APIExpansion.isLookingAt(player, (Player)otherPlayer, stunDist, cosDetectionAngle)) {continue;}
-			tree.put(player.getLocation().distance(otherPlayer.getLocation()), otherPlayer);
-		}
-		for (int i=0; i<tree.size(); i++) {
-			Player playerToStun = (Player)tree.get(tree.firstKey());
-			tree.remove(tree.firstKey());
-			if(playerToStun.hasPotionEffect(PotionEffectType.SLOW)) {
-				playerToStun.removePotionEffect(PotionEffectType.SLOW);
-			}
-			playerToStun.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, timeStun, 5));
-			playerToStun.getWorld().spawnParticle(Particle.CLOUD, playerToStun.getLocation(), 25, 0.5, 0.5, 0.5, 0.25);
-			countUnderStun++;
-			if (countUnderStun>=limitPlayerStun&&!unlimitedPlayerStun) {break;}
-		}
-		return;
-	}
+	}	
 	
 	@Override
 	public void onCall(Player player) {
+		List<EntityType> entityType = new ArrayList<EntityType>();
+		entityType.add(EntityType.PLAYER);
+		List<LivingEntity> targets = null;
+		if (unlimitedPlayerStun) {
+			targets = APIExpansion.getUnderAbservation(player, 
+					entityType, stunDist, cosDetectionAngle);
+		} else {
+			targets = APIExpansion.getUnderAbservation(player, 
+					entityType, stunDist, cosDetectionAngle, limitPlayerStun);
+		}
+		if (targets!=null) {
+			for (LivingEntity entity : targets) {
+				if(entity.hasPotionEffect(PotionEffectType.SLOW)) {
+					entity.removePotionEffect(PotionEffectType.SLOW);
+				}
+				entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, timeStun, 5));
+				entity.getWorld().spawnParticle(Particle.CLOUD, entity.getLocation(), 25, 0.5, 0.5, 0.5, 0.25);
+			}
+		}
 		player.sendMessage(useMessage);
 		player.giveExp((-1)*cost);
-		stunWave(player);
 		return;
 	}
 

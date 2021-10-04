@@ -19,7 +19,8 @@ public class Tasks {
 						Server server = Bukkit.getServer();
 						for (Player player : server.getOnlinePlayers()) {
 							player.giveExp(mainPlugin.addExpInSec);
-							int playerLevel = mainPlugin.getPlayerDataMap().get(player.getName()).getPlayerLevel();
+							int playerLevel = 
+									mainPlugin.getPlayerDataMap().get(player.getUniqueId().toString()).getPlayerLevel();
 							if (player.getLevel()>playerLevel) {
 								player.setLevel(playerLevel);
 								player.setExp(0.99f);

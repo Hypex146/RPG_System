@@ -1,6 +1,5 @@
 package plugin.player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -42,14 +41,11 @@ public class PlayerData {
 		this.playerName = player.getName();
 		pathToFile = pathToFolder + "/" + uuid.toString();
 		abilitiesMap = new HashMap<String, Ability>();
-		checkConfig();
+		loadConfig();
 		return;
 	}
 	
-	private void checkConfig() {
-		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToFile);
-		playerLevel = Configurator.getInt(config, "Player.level", 1);
-		List<String> possibleAbilitiesStr = Configurator.getStringList(config, "AvailableAbilities");
+	private void loadAbilities(List<String> possibleAbilitiesStr) {
 		for (int i=0; i<possibleAbilitiesStr.size(); i++) {
 			Ability ability;
 			ability = Abilities.createAbility(possibleAbilitiesStr.get(i), mainPlugin, 1);
@@ -69,13 +65,21 @@ public class PlayerData {
 						"Уже зарегистрирована способность "+abilityName+" у игрока "+playerName);
 			}
 		}
+	}
+	
+	private void loadConfig() {
+		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToFile);
+		Configurator.setString(config, "name", playerName);
+		playerLevel = Configurator.getInt(config, "level", 1);
+		List<String> possibleAbilitiesStr = Configurator.getStringList(config, "Available-Abilities");
+		loadAbilities(possibleAbilitiesStr);
 		Configurator.saveCustomConfig(mainPlugin, pathToFile, config);
 		return;
 	}
 	
 	public void savePlayerData() {
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToFile);
-		Configurator.setInt(config, "Player.level", playerLevel);
+		Configurator.setInt(config, "level", playerLevel);
 		Configurator.saveCustomConfig(mainPlugin, pathToFile, config);
 		return;
 	}

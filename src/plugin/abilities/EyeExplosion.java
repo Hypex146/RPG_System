@@ -1,12 +1,18 @@
 package plugin.abilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import plugin.RPGSystem;
 import plugin.utilities.APIExpansion;
@@ -41,7 +47,7 @@ public class EyeExplosion implements Ability {
 		damageRadius = Configurator.getInt(config, pathToLevelSection + ".damageRadius", 1);
 		chargingTime = Configurator.getInt(config, pathToLevelSection + ".chargingTime", 1);
 		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
-		damage = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 1D);
+		damage = Configurator.getDouble(config, pathToLevelSection + ".damage", 1D);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
 	
@@ -76,11 +82,11 @@ public class EyeExplosion implements Ability {
 	}
 	
 	private void abilityExplosion(Player player) {
-		for (Entity otherPlayer : player.getNearbyEntities(damageRadius, damageRadius, damageRadius)) {
-			if (otherPlayer.getType()!=EntityType.PLAYER) {continue;}
-			if (APIExpansion.isLookingAt((Player)otherPlayer, player, damageRadius, cosDetectionAngle)) {
-				((Player)otherPlayer).damage(damage, player);
-				}
+		List<EntityType> entityType = new ArrayList<EntityType>();
+		entityType.add(EntityType.PLAYER);
+		List<LivingEntity> targets = APIExpansion.getLookingEntities(player, entityType, damageRadius, cosDetectionAngle);
+		for (LivingEntity target : targets) {
+			target.damage(damage);
 		}
 		return;
 	}

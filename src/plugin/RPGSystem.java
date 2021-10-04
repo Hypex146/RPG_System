@@ -24,7 +24,7 @@ public class RPGSystem extends JavaPlugin {
 	private boolean enable;
 	private HashMap<String, PlayerData> playerDataMap;
 	private static Economy econ = null;
-	public int addExpInSec = 1;
+	public final int addExpInSec = 1;
 	
 	public RPGSystem() {
 		return;
@@ -37,7 +37,6 @@ public class RPGSystem extends JavaPlugin {
 	public void checkConfig() {
 		config = getConfig();
 		enable = Configurator.getBoolean(config, "enable", true);
-		addExpInSec = Configurator.getInt(config, "add-mana-in-sec", 1);
 		saveConfig();
 		return;
 	}
