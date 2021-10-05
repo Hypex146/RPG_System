@@ -10,6 +10,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.milkbowl.vault.economy.Economy;
+import plugin.abilities.AbilityConfigCreator;
 import plugin.commands.CommandLvl;
 import plugin.commands.CommandRpg;
 import plugin.listeners.AbilityCastListener;
@@ -94,7 +95,7 @@ public class RPGSystem extends JavaPlugin {
 		Tasks.addSchedule(this);
 		getServer().getPluginManager().registerEvents(new EventListener(this), this);
 		getServer().getPluginManager().registerEvents(new AbilityCastListener(this), this);
-		//readAbilityConfig();
+		AbilityConfigCreator.createAllConfig(this);
 		this.getCommand("rpg").setExecutor(new CommandRpg(this));
 		this.getCommand("lvl").setExecutor(new CommandLvl(this));
 		printHelloInConsole();

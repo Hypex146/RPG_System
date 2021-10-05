@@ -18,7 +18,7 @@ import plugin.utilities.APIExpansion;
 import plugin.utilities.Configurator;
 
 public class Stun implements Ability{
-	private final static String pathToConfig = "Settings/Abilities.yml";
+	private final static String pathToConfig = AbilityConfigCreator.getPathToConfig();
 	private final Abilities type = Abilities.STUN;
 	private final static int maxLevel = 3;
 	private final RPGSystem mainPlugin;
