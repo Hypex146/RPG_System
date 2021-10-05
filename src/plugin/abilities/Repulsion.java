@@ -22,8 +22,9 @@ public class Repulsion implements Ability{
 	private int cost;					//Configurable
 	private String useMessage;			//Configurable
 	private String lowManaMessage;		//Configurable
-	private int speedX;					//Configurable
-	private int speedY;					//Configurable
+	private double horizontalSpeed;		//Configurable
+	private double verticalSpeed;			//Configurable
+	private double verticalOffset;			//Configurable
 	private int repulsionRadius;		//Configurable
 	private double cosDetectionAngle;	//Configurable
 	private boolean multipleTarget;		//Configurable
@@ -40,11 +41,12 @@ public class Repulsion implements Ability{
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
 		String pathToLevelSection = type.toString() + ".Level" + "_" + abilityLevel;
 		cost = Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		useMessage = Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		useMessage = Configurator.getString(config, pathToLevelSection + ".useMessage", "Repulsion!");
 		lowManaMessage = Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		speedX = Configurator.getInt(config, pathToLevelSection + ".speedX", 1);
-		speedY = Configurator.getInt(config, pathToLevelSection + ".speedY", 1);
-		repulsionRadius = Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 1);
+		horizontalSpeed = Configurator.getDouble(config, pathToLevelSection + ".horizontalSpeed", 1.2D);
+		verticalSpeed = Configurator.getDouble(config, pathToLevelSection + ".verticalSpeed", 1.2D);
+		verticalOffset = Configurator.getDouble(config, pathToLevelSection + ".verticalOffset", 0.2D);
+		repulsionRadius = Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 5);
 		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		multipleTarget = Configurator.getBoolean(config, pathToLevelSection + ".multipleTarget", true);
 		limitPlayerRepulse = Configurator.getInt(config, pathToLevelSection + ".limitPlayerRepulse", 1);
@@ -87,9 +89,9 @@ public class Repulsion implements Ability{
 			Vector repulseVector = null;
 			repulseVector = player.getLocation().toVector().subtract(target.getLocation().toVector());
 			repulseVector.normalize();
-			repulseVector.setX(repulseVector.getX() * -1);
-			repulseVector.setY(repulseVector.getY() * -1);
-			repulseVector.setZ(repulseVector.getZ() * -1);
+			repulseVector.setX(repulseVector.getX() * -1 * horizontalSpeed);
+			repulseVector.setY((repulseVector.getY() * -1 + verticalOffset) * verticalSpeed);
+			repulseVector.setZ(repulseVector.getZ() * -1 * horizontalSpeed);
 			target.setVelocity(repulseVector);
 		}
 		return;

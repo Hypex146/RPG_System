@@ -42,12 +42,12 @@ public class Stun implements Ability{
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
 		String pathToLevelSection = type.toString() + ".Level" + "_" + abilityLevel;
 		cost = Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		useMessage = Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		useMessage = Configurator.getString(config, pathToLevelSection + ".useMessage", "Stun!");
 		lowManaMessage = Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		stunDist = Configurator.getInt(config, pathToLevelSection + ".stunDist", 1);
+		stunDist = Configurator.getInt(config, pathToLevelSection + ".stunDist", 5);
 		limitPlayerStun = Configurator.getInt(config, pathToLevelSection + ".limitPlayerStun", 1);
 		unlimitedPlayerStun = Configurator.getBoolean(config, pathToLevelSection + ".unlimitedPlayerStun", false);
-		timeStun = Configurator.getInt(config, pathToLevelSection + ".timeStun", 1);
+		timeStun = Configurator.getInt(config, pathToLevelSection + ".timeStun", 20);
 		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}

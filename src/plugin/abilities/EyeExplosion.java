@@ -44,10 +44,10 @@ public class EyeExplosion implements Ability {
 		cost = Configurator.getInt(config, pathToLevelSection + ".cost", 1);
 		useMessage = Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
 		lowManaMessage = Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		damageRadius = Configurator.getInt(config, pathToLevelSection + ".damageRadius", 1);
-		chargingTime = Configurator.getInt(config, pathToLevelSection + ".chargingTime", 1);
-		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
-		damage = Configurator.getDouble(config, pathToLevelSection + ".damage", 1D);
+		damageRadius = Configurator.getInt(config, pathToLevelSection + ".damageRadius", 5);
+		chargingTime = Configurator.getInt(config, pathToLevelSection + ".chargingTime", 5);
+		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.5D);
+		damage = Configurator.getDouble(config, pathToLevelSection + ".damage", 3D);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
 	

@@ -20,28 +20,28 @@ public class AbilityConfigCreator {
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
 		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".damageRadius", 1);
-		Configurator.getInt(config, pathToLevelSection + ".chargingTime", 1);
-		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
-		Configurator.getDouble(config, pathToLevelSection + ".damage", 1D);
+		Configurator.getInt(config, pathToLevelSection + ".damageRadius", 5);
+		Configurator.getInt(config, pathToLevelSection + ".chargingTime", 5);
+		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.5D);
+		Configurator.getDouble(config, pathToLevelSection + ".damage", 3D);
 		// Level: 2
 		pathToLevelSection = Abilities.EYEEXPLOSION.toString() + ".Level_2";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
 		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".damageRadius", 1);
-		Configurator.getInt(config, pathToLevelSection + ".chargingTime", 1);
-		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
-		Configurator.getDouble(config, pathToLevelSection + ".damage", 1D);
+		Configurator.getInt(config, pathToLevelSection + ".damageRadius", 5);
+		Configurator.getInt(config, pathToLevelSection + ".chargingTime", 5);
+		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.5D);
+		Configurator.getDouble(config, pathToLevelSection + ".damage", 3D);
 		// Level: 3
 		pathToLevelSection = Abilities.EYEEXPLOSION.toString() + ".Level_3";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
 		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".damageRadius", 1);
-		Configurator.getInt(config, pathToLevelSection + ".chargingTime", 1);
-		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
-		Configurator.getDouble(config, pathToLevelSection + ".damage", 1D);
+		Configurator.getInt(config, pathToLevelSection + ".damageRadius", 5);
+		Configurator.getInt(config, pathToLevelSection + ".chargingTime", 5);
+		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.5D);
+		Configurator.getDouble(config, pathToLevelSection + ".damage", 3D);
 		//
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
@@ -52,33 +52,36 @@ public class AbilityConfigCreator {
 		// Level: 1
 		pathToLevelSection = Abilities.REPULSION.toString() + ".Level_1";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		Configurator.getString(config, pathToLevelSection + ".useMessage", "Repulsion!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".speedX", 1);
-		Configurator.getInt(config, pathToLevelSection + ".speedY", 1);
-		Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 1);
+		Configurator.getDouble(config, pathToLevelSection + ".horizontalSpeed", 1.2D);
+		Configurator.getDouble(config, pathToLevelSection + ".verticalSpeed", 1.2D);
+		Configurator.getDouble(config, pathToLevelSection + ".verticalOffset", 0.2D);
+		Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 5);
 		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		Configurator.getBoolean(config, pathToLevelSection + ".multipleTarget", true);
 		Configurator.getInt(config, pathToLevelSection + ".limitPlayerRepulse", 1);
 		// Level: 2
 		pathToLevelSection = Abilities.REPULSION.toString() + ".Level_2";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		Configurator.getString(config, pathToLevelSection + ".useMessage", "Repulsion!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".speedX", 1);
-		Configurator.getInt(config, pathToLevelSection + ".speedY", 1);
-		Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 1);
+		Configurator.getDouble(config, pathToLevelSection + ".horizontalSpeed", 1.2D);
+		Configurator.getDouble(config, pathToLevelSection + ".verticalSpeed", 1.2D);
+		Configurator.getDouble(config, pathToLevelSection + ".verticalOffset", 0.2D);
+		Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 5);
 		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		Configurator.getBoolean(config, pathToLevelSection + ".multipleTarget", true);
 		Configurator.getInt(config, pathToLevelSection + ".limitPlayerRepulse", 1);
 		// Level: 3
 		pathToLevelSection = Abilities.REPULSION.toString() + ".Level_3";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		Configurator.getString(config, pathToLevelSection + ".useMessage", "Repulsion!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".speedX", 1);
-		Configurator.getInt(config, pathToLevelSection + ".speedY", 1);
-		Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 1);
+		Configurator.getDouble(config, pathToLevelSection + ".horizontalSpeed", 1.2D);
+		Configurator.getDouble(config, pathToLevelSection + ".verticalSpeed", 1.2D);
+		Configurator.getDouble(config, pathToLevelSection + ".verticalOffset", 0.2D);
+		Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 5);
 		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		Configurator.getBoolean(config, pathToLevelSection + ".multipleTarget", true);
 		Configurator.getInt(config, pathToLevelSection + ".limitPlayerRepulse", 1);
@@ -90,34 +93,34 @@ public class AbilityConfigCreator {
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
 		String pathToLevelSection = "";
 		// Level: 1
-		pathToLevelSection = Abilities.STUN.toString() + ".Level_3";
+		pathToLevelSection = Abilities.STUN.toString() + ".Level_1";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		Configurator.getString(config, pathToLevelSection + ".useMessage", "Stun!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".stunDist", 1);
+		Configurator.getInt(config, pathToLevelSection + ".stunDist", 5);
 		Configurator.getInt(config, pathToLevelSection + ".limitPlayerStun", 1);
 		Configurator.getBoolean(config, pathToLevelSection + ".unlimitedPlayerStun", false);
-		Configurator.getInt(config, pathToLevelSection + ".timeStun", 1);
+		Configurator.getInt(config, pathToLevelSection + ".timeStun", 20);
 		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		// Level: 2
-		pathToLevelSection = Abilities.STUN.toString() + ".Level_3";
+		pathToLevelSection = Abilities.STUN.toString() + ".Level_2";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		Configurator.getString(config, pathToLevelSection + ".useMessage", "Stun!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".stunDist", 1);
+		Configurator.getInt(config, pathToLevelSection + ".stunDist", 5);
 		Configurator.getInt(config, pathToLevelSection + ".limitPlayerStun", 1);
 		Configurator.getBoolean(config, pathToLevelSection + ".unlimitedPlayerStun", false);
-		Configurator.getInt(config, pathToLevelSection + ".timeStun", 1);
+		Configurator.getInt(config, pathToLevelSection + ".timeStun", 20);
 		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		// Level: 3
 		pathToLevelSection = Abilities.STUN.toString() + ".Level_3";
 		Configurator.getInt(config, pathToLevelSection + ".cost", 1);
-		Configurator.getString(config, pathToLevelSection + ".useMessage", "EyeExplosion!");
+		Configurator.getString(config, pathToLevelSection + ".useMessage", "Stun!");
 		Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		Configurator.getInt(config, pathToLevelSection + ".stunDist", 1);
+		Configurator.getInt(config, pathToLevelSection + ".stunDist", 5);
 		Configurator.getInt(config, pathToLevelSection + ".limitPlayerStun", 1);
 		Configurator.getBoolean(config, pathToLevelSection + ".unlimitedPlayerStun", false);
-		Configurator.getInt(config, pathToLevelSection + ".timeStun", 1);
+		Configurator.getInt(config, pathToLevelSection + ".timeStun", 20);
 		Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		//
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
