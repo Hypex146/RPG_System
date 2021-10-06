@@ -19,8 +19,8 @@ import plugin.utilities.Configurator;
 
 public class Stun implements Ability{
 	private final static String pathToConfig = AbilityConfigCreator.getPathToConfig();
-	private final Abilities type = Abilities.STUN;
-	private final static int maxLevel = 3;
+	private final static Abilities type = Abilities.STUN;
+	private static int maxLevel = 3;
 	private final RPGSystem mainPlugin;
 	private int cost;						//Configurable
 	private String useMessage;				//Configurable
@@ -34,8 +34,14 @@ public class Stun implements Ability{
 	
 	public Stun(RPGSystem mainPlugin, int abilityLevel) {
 		this.mainPlugin = mainPlugin;
-		this.abilityLevel = abilityLevel;
+		this.abilityLevel = (abilityLevel>maxLevel || abilityLevel<1) ? 1 : abilityLevel;
 		update();
+	}
+	
+	public static void staticUpdate(RPGSystem mainPlugin) {
+		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
+		maxLevel = Configurator.getInt(config, type.toString(), 3);
+		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
 	
 	private void update() {

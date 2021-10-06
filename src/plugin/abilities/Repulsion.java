@@ -16,8 +16,8 @@ import plugin.utilities.Configurator;
 
 public class Repulsion implements Ability{
 	private final static String pathToConfig = AbilityConfigCreator.getPathToConfig();
-	private final Abilities type = Abilities.REPULSION;
-	private final static int maxLevel = 3;
+	private final static Abilities type = Abilities.REPULSION;
+	private static int maxLevel = 3;
 	private final RPGSystem mainPlugin;
 	private int cost;					//Configurable
 	private String useMessage;			//Configurable
@@ -33,8 +33,14 @@ public class Repulsion implements Ability{
 	
 	public Repulsion(RPGSystem mainPlugin, int abilityLevel) {
 		this.mainPlugin = mainPlugin;
-		this.abilityLevel = abilityLevel;
+		this.abilityLevel = (abilityLevel>maxLevel || abilityLevel<1) ? 1 : abilityLevel;
 		update();
+	}
+	
+	public static void staticUpdate(RPGSystem mainPlugin) {
+		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
+		maxLevel = Configurator.getInt(config, type.toString(), 3);
+		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
 	
 	private void update() {

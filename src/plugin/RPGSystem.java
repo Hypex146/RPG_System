@@ -11,6 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.milkbowl.vault.economy.Economy;
 import plugin.abilities.AbilityConfigCreator;
+import plugin.abilities.EyeExplosion;
+import plugin.abilities.Repulsion;
+import plugin.abilities.Stun;
 import plugin.commands.CommandLvl;
 import plugin.commands.CommandRpg;
 import plugin.listeners.AbilityCastListener;
@@ -70,6 +73,12 @@ public class RPGSystem extends JavaPlugin {
         return econ;
     }
     
+    public void generateStaticFieldForAbilities() {
+    	EyeExplosion.staticUpdate(this);
+    	Repulsion.staticUpdate(this);
+    	Stun.staticUpdate(this);
+    }
+    
 	@Override
 	public void onEnable() {
 		checkConfig();
@@ -95,6 +104,7 @@ public class RPGSystem extends JavaPlugin {
 		Tasks.addSchedule(this);
 		getServer().getPluginManager().registerEvents(new EventListener(this), this);
 		getServer().getPluginManager().registerEvents(new AbilityCastListener(this), this);
+		generateStaticFieldForAbilities();
 		AbilityConfigCreator.createAllConfig(this);
 		this.getCommand("rpg").setExecutor(new CommandRpg(this));
 		this.getCommand("lvl").setExecutor(new CommandLvl(this));
