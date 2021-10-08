@@ -7,7 +7,9 @@ commands:
    rpg:
       description: All command to control plugin
    lvl:
-      description: lvl information
+      description: Lvl information
+   test:
+      description: Only for testing methods
 permissions:
    rpg.*:
       description: Gives access to all commands

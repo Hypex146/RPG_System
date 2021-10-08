@@ -16,6 +16,7 @@ import plugin.abilities.Repulsion;
 import plugin.abilities.Stun;
 import plugin.commands.CommandLvl;
 import plugin.commands.CommandRpg;
+import plugin.commands.CommandTest;
 import plugin.listeners.AbilityCastListener;
 import plugin.listeners.EventListener;
 import plugin.player.PlayerData;
@@ -108,6 +109,7 @@ public class RPGSystem extends JavaPlugin {
 		AbilityConfigCreator.createAllConfig(this);
 		this.getCommand("rpg").setExecutor(new CommandRpg(this));
 		this.getCommand("lvl").setExecutor(new CommandLvl(this));
+		this.getCommand("test").setExecutor(new CommandTest(this));
 		printHelloInConsole();
 		return;
 	}
