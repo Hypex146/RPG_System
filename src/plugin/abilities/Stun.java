@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
@@ -20,8 +21,9 @@ import plugin.utilities.Configurator;
 public class Stun implements Ability{
 	private final static String pathToConfig = AbilityConfigCreator.getPathToConfig();
 	private final static Abilities type = Abilities.STUN;
+	private final static RPGSystem mainPlugin = 
+			(RPGSystem) Bukkit.getServer().getPluginManager().getPlugin(RPGSystem.getPluginName());
 	private static int maxLevel = 3;
-	private final RPGSystem mainPlugin;
 	private int cost;						//Configurable
 	private String useMessage;				//Configurable
 	private String lowManaMessage;			//Configurable
@@ -32,13 +34,12 @@ public class Stun implements Ability{
 	private double cosDetectionAngle;		//Configurable
 	private int abilityLevel;
 	
-	public Stun(RPGSystem mainPlugin, int abilityLevel) {
-		this.mainPlugin = mainPlugin;
+	public Stun(int abilityLevel) {
 		this.abilityLevel = (abilityLevel>maxLevel || abilityLevel<1) ? 1 : abilityLevel;
 		update();
 	}
 	
-	public static void staticUpdate(RPGSystem mainPlugin) {
+	public static void staticUpdate() {
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
 		maxLevel = Configurator.getInt(config, type.toString(), 3);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);

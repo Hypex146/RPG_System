@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,7 +14,7 @@ import plugin.RPGSystem;
 import plugin.utilities.APIExpansion;
 import plugin.utilities.Configurator;
 
-public class Repulsion implements Ability{
+public class Pull implements Ability{ /* This class is not finished and not tested */
 	private final static String pathToConfig = AbilityConfigCreator.getPathToConfig();
 	private final static Abilities type = Abilities.REPULSION;
 	private final static RPGSystem mainPlugin = 
@@ -24,16 +23,13 @@ public class Repulsion implements Ability{
 	private int cost;					//Configurable
 	private String useMessage;			//Configurable
 	private String lowManaMessage;		//Configurable
-	private double horizontalSpeed;		//Configurable
-	private double verticalSpeed;		//Configurable
-	private double verticalOffset;		//Configurable
 	private int repulsionRadius;		//Configurable
 	private double cosDetectionAngle;	//Configurable
 	private boolean multipleTarget;		//Configurable
 	private int limitPlayerRepulse;		//Configurable
 	private int abilityLevel;
 	
-	public Repulsion(int abilityLevel) {
+	public Pull(int abilityLevel) {
 		this.abilityLevel = (abilityLevel>maxLevel || abilityLevel<1) ? 1 : abilityLevel;
 		update();
 	}
@@ -44,28 +40,34 @@ public class Repulsion implements Ability{
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
 	
+	private double calculateHorizontalSpeed(double distance) {
+		double horizontalSpeed = 0;
+		horizontalSpeed = 1;
+		/*
+		 * This function is not done!!!!
+		 */
+		return horizontalSpeed;
+	}
+	
 	private void update() {
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
 		String pathToLevelSection = type.toString() + ".Level" + "_" + abilityLevel;
 		cost = Configurator.getInt(config, pathToLevelSection + ".cost", 1);
 		useMessage = Configurator.getString(config, pathToLevelSection + ".useMessage", "Repulsion!");
 		lowManaMessage = Configurator.getString(config, pathToLevelSection + ".lowManaMessage", "Low mana!");
-		horizontalSpeed = Configurator.getDouble(config, pathToLevelSection + ".horizontalSpeed", 1.2D);
-		verticalSpeed = Configurator.getDouble(config, pathToLevelSection + ".verticalSpeed", 1.2D);
-		verticalOffset = Configurator.getDouble(config, pathToLevelSection + ".verticalOffset", 0.2D);
 		repulsionRadius = Configurator.getInt(config, pathToLevelSection + ".repulsionRadius", 5);
 		cosDetectionAngle = Configurator.getDouble(config, pathToLevelSection + ".cosDetectionAngle", 0.95D);
 		multipleTarget = Configurator.getBoolean(config, pathToLevelSection + ".multipleTarget", true);
 		limitPlayerRepulse = Configurator.getInt(config, pathToLevelSection + ".limitPlayerRepulse", 1);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);
 	}
-	
+
 	@Override
 	public void setLevel(int level) {
 		this.abilityLevel = level;
 		update();
 	}
-	
+
 	@Override
 	public int getLevel() {
 		return abilityLevel;
@@ -75,37 +77,34 @@ public class Repulsion implements Ability{
 	public int getCost() {
 		return cost;
 	}
-	
+
+	@Override
 	public Abilities getType() {
 		return type;
 	}
 
 	@Override
 	public boolean canCall(Player player) {
-		/*
-		if ((player.getExp())<((float)cost/(float)mainPlugin.EXPTOFULL)) {
-			player.sendMessage(lowManaMessage);
-			return false;
-		}*/
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
-	private void repulse(Player player, List<LivingEntity> targetList) {
+	private void pull(Player player, List<LivingEntity> targetList) { /* is not done*/
 		if (targetList==null) {return;}
 		for (LivingEntity target : targetList) {
 			Vector repulseVector = null;
 			repulseVector = player.getLocation().toVector().subtract(target.getLocation().toVector());
 			repulseVector.normalize();
-			repulseVector.setX(repulseVector.getX() * -1 * horizontalSpeed);
-			repulseVector.setY((repulseVector.getY() * -1 + verticalOffset) * verticalSpeed);
-			repulseVector.setZ(repulseVector.getZ() * -1 * horizontalSpeed);
+			repulseVector.setX(repulseVector.getX() * 1);
+			repulseVector.setY((repulseVector.getY() + 0.2) * calculateHorizontalSpeed(0));
+			repulseVector.setZ(repulseVector.getZ() * 1);
 			target.setVelocity(repulseVector);
 		}
 		return;
 	}
 
 	@Override
-	public void onCall(Player player) {
+	public void onCall(Player player) { /* is not done */
 		List<EntityType> entityType = new ArrayList<EntityType>();
 		entityType.add(EntityType.PLAYER);
 		List<LivingEntity> targets = null;
@@ -116,10 +115,10 @@ public class Repulsion implements Ability{
 			targets = APIExpansion.getUnderAbservation(player, 
 					entityType, repulsionRadius, cosDetectionAngle, limitPlayerRepulse);
 		}
-		repulse(player, targets);
+		pull(player, targets);
 		player.sendMessage(useMessage);
 		player.giveExp((-1)*cost);
 		return;
 	}
-
+	
 }

@@ -21,8 +21,9 @@ import plugin.utilities.Configurator;
 public class EyeExplosion implements Ability {
 	private final static String pathToConfig = AbilityConfigCreator.getPathToConfig();
 	private final static Abilities type = Abilities.EYEEXPLOSION;
+	private final static RPGSystem mainPlugin = 
+			(RPGSystem) Bukkit.getServer().getPluginManager().getPlugin(RPGSystem.getPluginName());
 	private static int maxLevel;
-	private final RPGSystem mainPlugin;
 	private int cost;					//Configurable
 	private String useMessage;			//Configurable
 	private String lowManaMessage;		//Configurable
@@ -32,13 +33,12 @@ public class EyeExplosion implements Ability {
 	private double damage;				//Configurable
 	private int abilityLevel;
 	
-	public EyeExplosion(RPGSystem mainPlugin, int abilityLevel) {
-		this.mainPlugin = mainPlugin;
+	public EyeExplosion(int abilityLevel) {
 		this.abilityLevel = (abilityLevel>maxLevel || abilityLevel<1) ? 1 : abilityLevel;
 		update();
 	}
 	
-	public static void staticUpdate(RPGSystem mainPlugin) {
+	public static void staticUpdate() {
 		FileConfiguration config = Configurator.getCustomConfig(mainPlugin, pathToConfig);
 		maxLevel = Configurator.getInt(config, type.toString(), 3);
 		Configurator.saveCustomConfig(mainPlugin, pathToConfig, config);

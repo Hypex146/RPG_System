@@ -1,21 +1,23 @@
 package plugin.abilities;
 
-import plugin.RPGSystem;
-
 public enum Abilities {
 	EYEEXPLOSION,
 	STUN,
-	REPULSION;
+	REPULSION,
+	PULL;
 	
-	public static Ability createAbility(String abilityName, RPGSystem mainPlugin, int abilityLevel) {
+	public static Ability createAbility(String abilityName, int abilityLevel) {
 		if (abilityName.equals(Abilities.EYEEXPLOSION.toString())) {
-			return new EyeExplosion(mainPlugin, abilityLevel);
+			return new EyeExplosion(abilityLevel);
 		}
 		if (abilityName.equals(Abilities.STUN.toString())) {
-			return new Repulsion(mainPlugin, abilityLevel);
+			return new Repulsion(abilityLevel);
 		}
 		if (abilityName.equals(Abilities.REPULSION.toString())) {
-			return new Stun(mainPlugin, abilityLevel);
+			return new Stun(abilityLevel);
+		}
+		if (abilityName.equals(Abilities.PULL.toString())) {
+			return new Pull(abilityLevel);
 		}
 		return null;
 	}

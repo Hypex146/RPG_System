@@ -48,7 +48,7 @@ public class PlayerData {
 	private void loadAbilities(List<String> possibleAbilitiesStr) {
 		for (int i=0; i<possibleAbilitiesStr.size(); i++) {
 			Ability ability;
-			ability = Abilities.createAbility(possibleAbilitiesStr.get(i), mainPlugin, 1);
+			ability = Abilities.createAbility(possibleAbilitiesStr.get(i), 1);
 			if (ability == null) {
 				mainPlugin.getLogger().log(Level.WARNING, 
 						"ќбнаружена недействительна€ способность "+possibleAbilitiesStr.get(i)

@@ -24,12 +24,19 @@ import plugin.requiredExpansions.PAPIExpansion;
 import plugin.tasks.Tasks;
 import plugin.utilities.Configurator;
 
+
+
 public class RPGSystem extends JavaPlugin {
+	private final static String pluginName = "RPG_System";
 	private FileConfiguration config;
 	private boolean enable;
 	private HashMap<String, PlayerData> playerDataMap;
 	private static Economy econ = null;
 	public final int addExpInSec = 1;
+	
+	public static String getPluginName() {
+		return pluginName;
+	}
 	
 	public RPGSystem() {
 		return;
@@ -75,9 +82,9 @@ public class RPGSystem extends JavaPlugin {
     }
     
     public void generateStaticFieldForAbilities() {
-    	EyeExplosion.staticUpdate(this);
-    	Repulsion.staticUpdate(this);
-    	Stun.staticUpdate(this);
+    	EyeExplosion.staticUpdate();
+    	Repulsion.staticUpdate();
+    	Stun.staticUpdate();
     }
     
 	@Override
