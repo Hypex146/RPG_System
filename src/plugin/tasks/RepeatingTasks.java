@@ -7,7 +7,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import plugin.RPGSystem;
 
-public class Tasks {
+public abstract class RepeatingTasks {
 	
 	static public void addSchedule(RPGSystem mainPlugin) {
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

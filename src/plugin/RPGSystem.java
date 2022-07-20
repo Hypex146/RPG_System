@@ -18,10 +18,10 @@ import plugin.commands.CommandLvl;
 import plugin.commands.CommandRpg;
 import plugin.commands.CommandTest;
 import plugin.listeners.AbilityCastListener;
-import plugin.listeners.EventListener;
+import plugin.listeners.OtherEventListener;
 import plugin.player.PlayerData;
-import plugin.requiredExpansions.PAPIExpansion;
-import plugin.tasks.Tasks;
+import plugin.pluginsExpansions.PAPIExpansion;
+import plugin.tasks.RepeatingTasks;
 import plugin.utilities.Configurator;
 
 
@@ -109,8 +109,8 @@ public class RPGSystem extends JavaPlugin {
         new PAPIExpansion(this).register();
         getLogger().log(Level.INFO, "Был зарегестирован PAPIExpansion");
 		playerDataMap = new HashMap<String, PlayerData>();
-		Tasks.addSchedule(this);
-		getServer().getPluginManager().registerEvents(new EventListener(this), this);
+		RepeatingTasks.addSchedule(this);
+		getServer().getPluginManager().registerEvents(new OtherEventListener(this), this);
 		getServer().getPluginManager().registerEvents(new AbilityCastListener(this), this);
 		generateStaticFieldForAbilities();
 		AbilityConfigCreator.createAllConfig(this);

@@ -1,4 +1,4 @@
-package plugin.requiredExpansions;
+package plugin.pluginsExpansions;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;

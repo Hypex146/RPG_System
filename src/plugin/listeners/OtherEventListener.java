@@ -11,10 +11,10 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import plugin.RPGSystem;
 import plugin.player.PlayerData;
 
-public class EventListener implements Listener {
+public class OtherEventListener implements Listener {
 	private RPGSystem mainPlugin;
 	
-	public EventListener(RPGSystem mainPlugin) {
+	public OtherEventListener(RPGSystem mainPlugin) {
 		this.mainPlugin = mainPlugin;
 	}
 	
