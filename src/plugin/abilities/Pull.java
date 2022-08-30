@@ -85,7 +85,6 @@ public class Pull implements Ability{ /* This class is not finished and not test
 
 	@Override
 	public boolean canCall(Player player) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
